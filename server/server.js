@@ -1,16 +1,15 @@
 const express = require('express')
 const cors = require('cors')
 const loadJSONFile = require('./jsonloader')
+const path = require('path')
 
 const app = express();
 const PORT = 8080;
-const filePath = './data.json'
+const filePath = path.join(__dirname, 'data.json')
 
 let shiftsData = loadJSONFile(filePath)
 
-app.use(cors({
-  origin: ['http://localhost:3000']
-}))
+app.use(cors())
 app.use(express.json());
 
 app.get('/api/shifts', (_req, res) => {

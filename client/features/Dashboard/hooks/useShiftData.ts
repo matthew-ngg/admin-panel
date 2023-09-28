@@ -5,7 +5,7 @@ import { formatShiftData } from '../helpers/formatData';
 export const useShiftData = () => {
   const [shifts, setShifts] = useState<ShiftDataDTO>({});
   const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const apiHost = "http://localhost:8080"
+  const apiHost = process.env.API_HOST
 
   useEffect(() => {
     fetchShiftData();
