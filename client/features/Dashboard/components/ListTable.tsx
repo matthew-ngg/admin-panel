@@ -31,9 +31,9 @@ const BoldText = styled.p`
   font-weight: bold;
 `
 
-const ConfirmButton = styled.button`
-  background-color: ${props => props.disabled ? '#BCC3D1' : '#00AF7C'};
-  border: ${props => props.disabled ? 'none' : '1px solid transparent'};
+const ConfirmButton = styled.button<{ $disabled: boolean }>`
+  background-color: ${props => props.$disabled ? '#BCC3D1' : '#00AF7C'};
+  border: ${props => props.$disabled ? 'none' : '1px solid transparent'};
   height: 35px;
   width: 80px;
   border-radius: 4px;
@@ -106,7 +106,7 @@ const ListTable = ({ month, shiftData, postData }: IListTableProps) => {
         <BoldText>{month}</BoldText>
         <div>{`(${totalShifts} held shifts)`}</div>
         <div style={{ flexGrow: 1 }} />
-        <ConfirmButton disabled={selectedShifts.length === 0} onClick={handleConfirmButton}>Confirm</ConfirmButton>
+        <ConfirmButton $disabled={selectedShifts.length === 0} onClick={handleConfirmButton}>Confirm</ConfirmButton>
       </ContainerHeader>
       {Object.entries(shiftData).map(([date, shifts], index) => {
         return (

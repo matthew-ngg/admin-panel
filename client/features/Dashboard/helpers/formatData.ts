@@ -1,6 +1,14 @@
 import { ShiftData, ShiftDataDTO } from "../interfaces"
 import { parseISO, format, startOfMonth, startOfDay } from 'date-fns'
 
+/*
+  turn array of shifts into
+  {
+    Nov 2023: {
+      '2023-05-03T16:00:00.000Z': [shifts]
+    }
+  }
+*/
 export const formatShiftData = (shifts: ShiftData[]) => {
   const groupedShifts: ShiftDataDTO = {}
 

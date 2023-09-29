@@ -82,6 +82,7 @@ const Dashboard = () => {
   }
 
   const updateShiftData = useCallback((searchValue: string) => {
+    // reform ShiftDataDTO into array of shifts for string checking
     const flattenArr = flattenShiftData(shifts).filter(shift => {
       const trimmedName = (shift.lastName + shift.firstName + shift.chiName).replace(/\s/g, '').toLowerCase()
       const trimmedInput = searchValue.replace(/\s/g, '').toLowerCase()

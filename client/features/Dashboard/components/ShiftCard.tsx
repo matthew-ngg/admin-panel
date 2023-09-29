@@ -16,8 +16,8 @@ const CardContainer = styled.div`
   }
 `
 
-const Checkbox = styled(MuiCheckbox)<{ hidden?: boolean }>`
-  ${({ hidden }) => hidden && `
+const Checkbox = styled(MuiCheckbox)<{ $hidden?: boolean }>`
+  ${({ $hidden }) => $hidden && `
     opacity: 0;
     pointer-events: none;
   `}
@@ -36,16 +36,16 @@ const colorMap = {
   'PWH': '#FFD700'
 }
 
-const Circle = styled.div<{ type: 'ST' | 'EN' | 'PWH' }>`
+const Circle = styled.div<{ $type: 'ST' | 'EN' | 'PWH' }>`
   height: 10px;
   width: 10px;
-  background-color: ${props => colorMap[props.type] || '#FFD700'};
+  background-color: ${props => colorMap[props.$type] || '#FFD700'};
   border-radius: 50%;
 `
 
-const StatusLabel = styled.div<{ type: 'confirmed' | 'declined' }>`
-  background-color: ${props => props.type === 'confirmed' ? '#E6F8F3' : '#FEEBEB'};
-  color: ${props => props.type === 'confirmed' ? '#20B88C' : '#ED5047'};
+const StatusLabel = styled.div<{ $type: 'confirmed' | 'declined' }>`
+  background-color: ${props => props.$type === 'confirmed' ? '#E6F8F3' : '#FEEBEB'};
+  color: ${props => props.$type === 'confirmed' ? '#20B88C' : '#ED5047'};
   border-radius: 6px;
   border: 1px solid transparent;
   width: 80px;
@@ -62,9 +62,9 @@ const FlexContainer = styled.div`
   align-items: center;
 `
 
-const ConfirmButton = styled.button<{ disabled?: boolean }>`
-  background-color: ${props => props.disabled ? '#BCC3D1' : '#00AF7C'};
-  border: ${props => props.disabled ? 'none' : '1px solid transparent'};
+const ConfirmButton = styled.button<{ $disabled?: boolean }>`
+  background-color: ${props => props.$disabled ? '#BCC3D1' : '#00AF7C'};
+  border: ${props => props.$disabled ? 'none' : '1px solid transparent'};
   height: 35px;
   width: 80px;
   border-radius: 4px;
@@ -75,9 +75,9 @@ const ConfirmButton = styled.button<{ disabled?: boolean }>`
   font-weight: 600;
 `
 
-const DeclineButton = styled.button<{ disabled?: boolean }>`
-  background-color: ${props => props.disabled ? '#BCC3D1' : '#FFFFFF'};
-  border: ${props => props.disabled ? 'none' : '2px solid #EF7068'};
+const DeclineButton = styled.button<{ $disabled?: boolean }>`
+  background-color: ${props => props.$disabled ? '#BCC3D1' : '#FFFFFF'};
+  border: ${props => props.$disabled ? 'none' : '2px solid #EF7068'};
   height: 35px;
   width: 80px;
   border-radius: 4px;
@@ -107,11 +107,11 @@ const ShiftCard = ({ shifts, onCheckboxChange, selectedShifts, postData }: Shift
 
   const getStatus = (uuid: string, status: string) => {
     if (status === 'CONFIRMED') {
-      return <StatusLabel type="confirmed">Confirmed</StatusLabel>
+      return <StatusLabel $type="confirmed">Confirmed</StatusLabel>
     }
 
     if (status === 'DECLINED') {
-      return <StatusLabel type="declined">Declined</StatusLabel>
+      return <StatusLabel $type="declined">Declined</StatusLabel>
     }
 
     if (status === 'PENDING') {
@@ -135,15 +135,16 @@ const ShiftCard = ({ shifts, onCheckboxChange, selectedShifts, postData }: Shift
         const handleCardCheckboxChange = (selected: boolean) => {
           onCheckboxChange({ value: uuid, selected })
         }
+
         return (
           <CardContainer key={`card-${index}`}>
-            <Checkbox checked={selectedShifts.includes(uuid)} hidden={status !== "PENDING"} color="success" onChange={e => handleCardCheckboxChange(e.target.checked)}/>
+            <Checkbox checked={selectedShifts.includes(uuid)} $hidden={status !== "PENDING"} color="success" onChange={e => handleCardCheckboxChange(e.target.checked)}/>
 
             <Card>
               <p>{startTime} - {endTime}</p>
               <p>{name}</p>
               <FlexContainer>
-                <Circle type={role} />
+                <Circle $type={role} />
                 {role}
               </FlexContainer>
               {getStatus(uuid, status)}
